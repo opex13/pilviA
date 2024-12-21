@@ -1,4 +1,4 @@
-# Verkon uudelleenluonti toisessa ympäristössä
+# Projektin uudelleenluonti toisessa ympäristössä
 
 Tämä ohjeistus auttaa luomaan kehitysympäristön omalle koneellesi.
 
@@ -60,10 +60,53 @@ Korvaa `myblog.local` osoitteella `localhost`, jos et tehnyt hosts-muutoksia.
 - [http://localhost:8081/](http://localhost:8081/) phpMyAdmin
 - [http://localhost:8080/](http://localhost:8080/) Traefik Dashboard
 
+## 7. Palveluiden pysäyttäminen:
 
+Pysäytä palvelut komennolla:
+
+```
+docker-compose down
+```
+Jos haluat poistaa myös tiedostovolumeja (tietokannat, WordPress-tiedostot jne.), käytä:
+```
+docker-compose down -v
+```
+## 8. Ympäristön muuttujat ja volyymit:
+
+- `db_data`: MySQL-tietokannan data, alustetaan jokaisen ympäristön käynnistäessä. Tämä voi estää kommentoimalla rivit 42 ja 43 docker-compose.yml tiedostossa:
+```
+db:
+ volumes:
+...
+# - ./db_init/01_load_timezones.sql:/docker-entrypoint-initdb.d/01_load_timezones.sql
+# - ./db_init/02_wordpress_init.sql:/docker-entrypoint-initdb.d/02_init.sql
+```
+
+- `./wordpress`: WordPressin tiedostot, kuten teemat ja lisäosat.
+
+### WordPress-palvelu
+- `WORDPRESS_DB_HOST`: Määrittää tietokantapalvelimen, johon WordPress yhdistää.
+- `WORDPRESS_DB_USER`: Tietokantakäyttäjänimi.
+- `WORDPRESS_DB_PASSWORD`: Tietokantakäyttäjän salasana.
+- `WORDPRESS_DB_NAME`: Tietokannan nimi.
+- `WORDPRESS_CACHE_TYPE`: Varastointityyppi; tässä tapauksessa Redis.
+- `WORDPRESS_CACHE_REDIS_HOST`: Redis-varastoinnin palvelin.
+- `WORDPRESS_CACHE_REDIS_PORT`: Redis-varastoinnin portti.
+- `WORDPRESS_DEBUG`: Aktivoi WordPressin debug-tilan.
+
+### Tietokanta-palvelu (MySQL)
+- `MYSQL_ROOT_PASSWORD`: MySQL:n root-käyttäjän salasana.
+- `MYSQL_DATABASE`: Luotavan tietokannan nimi.
+- `MYSQL_USER`: Luotavan tietokantakäyttäjän nimi.
+- `MYSQL_PASSWORD`: Tietokantakäyttäjän salasana.
+
+### phpMyAdmin-palvelu
+- `PMA_HOST`: Tietokantapalvelin.
+- `PMA_USER`: Tietokantakäyttäjänimi phpMyAdminille.
+- `PMA_PASSWORD`: Tietokantakäyttäjän salasana.
 ---
 
-## Yhteystiedot ja tuki
+## Ongelmatilanteissa tarkistettava
 Jos kohtaat ongelmia ympäristön pystyttämisessä, tarkista seuraavat asiat:
 - Dockerin ja Docker Composen asennukset.
 - `docker-compose.yml`-tiedoston rakenne.
