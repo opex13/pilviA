@@ -21,8 +21,7 @@ services:
       - blog-network
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.wordpress.rule=Host(`myblog.local`)"
-      - "traefik.http.routers.wordpress.rule=Host(`localhost`)"
+      - "traefik.http.routers.wordpress.rule=Host(`myblog.local`) || Host(`localhost`)"
       - "traefik.http.routers.wordpress.entrypoints=web"
       - "traefik.http.services.wordpress.loadbalancer.server.port=80"
     command: >
@@ -40,6 +39,8 @@ services:
       MYSQL_PASSWORD: wordpress
     volumes:
       - db_data:/var/lib/mysql
+      - ./db_init/01_load_timezones.sql:/docker-entrypoint-initdb.d/01_load_timezones.sql
+      - ./db_init/02_wordpress_init.sql:/docker-entrypoint-initdb.d/02_init.sql
     networks:
       - blog-network
 
@@ -79,7 +80,7 @@ services:
       - blog-network
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.phpmyadmin.rule=Host(`phpmyadmin.myblog.local`)"
+      - "traefik.http.routers.phpmyadmin.rule=Host(`phpmyadmin.myblog.local`) || Host(`phpmyadmin.localhost`)"
       - "traefik.http.services.phpmyadmin.loadbalancer.server.port=80"
 
 volumes:
