@@ -39,7 +39,7 @@ services:
       MYSQL_PASSWORD: wordpress
     volumes:
       - db_data:/var/lib/mysql
-      - ./db_init/01_load_timezones.sql:/docker-entrypoint-initdb.d/01_load_timezones.sql
+      #- ./db_init/01_load_timezones.sql:/docker-entrypoint-initdb.d/01_load_timezones.sql
       - ./db_init/02_wordpress_init.sql:/docker-entrypoint-initdb.d/02_init.sql
     networks:
       - blog-network
