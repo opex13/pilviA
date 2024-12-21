@@ -28,7 +28,7 @@ TAI
 127.0.0.1 myblog.local
 ```
 
-- Tämä vaihe ei ole pakollinen, sillä voit käyttää myös osoitetta `[http://localhost](http://localhost)`.
+- Tämä vaihe ei ole pakollinen, sillä voit käyttää myös osoitetta `http://localhost`.
 
 ## 4. Käynnistä palvelut
 - Avaa terminaali tai komentokehote.
@@ -43,13 +43,13 @@ docker-compose up --build
 
 ## 5. Avaa selaimessa
 - Kun palvelut ovat käynnissä, avaa selain ja siirry seuraavaan osoitteeseen:
-  - `[http://myblog.local](http://myblog.local)` (jos lisäsit domain-nimen hosts-tiedostoon)
-  - `[http://localhost](http://localhost)` (jos et muokannut hosts-tiedostoa).
+  - `http://myblog.local` (jos lisäsit domain-nimen hosts-tiedostoon)
+  - `http://localhost` (jos et muokannut hosts-tiedostoa).
 
 - Voit kirjautua WordPress-järjestelmään osoitteessa:
 
 ```
-[http://myblog.local/wp-admin](http://myblog.local/wp-admin)
+http://myblog.local/wp-admin
 ```
 
 Korvaa `myblog.local` osoitteella `localhost`, jos et tehnyt hosts-muutoksia.
