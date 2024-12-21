@@ -10,13 +10,14 @@ Tämä ohjeistus auttaa luomaan kehitysympäristön omalle koneellesi.
 - Kloonaa projektin GitHub-repositorio komentorivillä:
 
 ```bash
-git clone <repository_url>
+git clone https://github.com/opex13/pilviA.git
 ```
 TAI
-- Siirrä "blog-platform"-hakemisto sijaintiin, johon pääset helposti käsiksi.
-  - Varmista, että mukana ovat ainakin seuraavat tiedostot:
+- Ladata ja siirrä "blog-platform"-hakemisto sijaintiin, johon pääset helposti käsiksi.
+  - Varmista, että mukana ovat seuraavat tiedostot:
     - `docker-compose.yml`
-    - muut mahdolliset projektikonfiguraatiotiedostot.
+    - `db_init` kansio
+    - `wordpress` kansio
 
 ## 3. Muokkaa hosts-tiedostoa (valinnainen)
 - Jos haluat käyttää mukautettua domain-nimeä, lisää seuraavat rivit hosts-tiedostoosi:
@@ -27,7 +28,7 @@ TAI
 127.0.0.1 myblog.local
 ```
 
-- Tämä vaihe ei ole pakollinen, sillä voit käyttää myös osoitetta `http://localhost`.
+- Tämä vaihe ei ole pakollinen, sillä voit käyttää myös osoitetta `[http://localhost](http://localhost)`.
 
 ## 4. Käynnistä palvelut
 - Avaa terminaali tai komentokehote.
@@ -42,16 +43,23 @@ docker-compose up --build
 
 ## 5. Avaa selaimessa
 - Kun palvelut ovat käynnissä, avaa selain ja siirry seuraavaan osoitteeseen:
-  - `http://myblog.local` (jos lisäsit domain-nimen hosts-tiedostoon)
-  - `http://localhost` (jos et muokannut hosts-tiedostoa).
+  - `[http://myblog.local](http://myblog.local)` (jos lisäsit domain-nimen hosts-tiedostoon)
+  - `[http://localhost](http://localhost)` (jos et muokannut hosts-tiedostoa).
 
 - Voit kirjautua WordPress-järjestelmään osoitteessa:
 
 ```
-http://myblog.local/wp-admin
+[http://myblog.local/wp-admin](http://myblog.local/wp-admin)
 ```
 
 Korvaa `myblog.local` osoitteella `localhost`, jos et tehnyt hosts-muutoksia.
+
+## 6. Muut palvelut ovat saatavilla:
+
+
+- [http://localhost:8081/](http://localhost:8081/) phpMyAdmin
+- [http://localhost:8080/](http://localhost:8080/) Traefik Dashboard
+
 
 ---
 
